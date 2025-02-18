@@ -2,7 +2,12 @@
 
 FILE="main.cpp"
 
+HEX_PATTERN="0[xX][0-9a-fA-F]([0-9a-fA-F']*[0-9a-fA-F])?"
+OCT_PATTERN="0[0-7]([0-7']*[0-7])?"
+DEC_PATTERN="[1-9]([0-9']*[0-9])?"
+SUFFIX_PATTERN="[uUlLzZ]*"
 
-REGEXP="\b(0[bB][01']+|[0-9']+|0[0-7']+|0[xX][0-9a-fA-F']+)([uU]?[lL]{0,2}|[lL]{0,2}[uU]?)\b"
+REGEXP="\\b((${HEX_PATTERN}|${OCT_PATTERN}|${DEC_PATTERN})${SUFFIX_PATTERN})\\b"
 
-grep -E -o  "$REGEXP" "$FILE"
+# Поиск литералов
+grep -E -o "$REGEXP" "$FILE"
